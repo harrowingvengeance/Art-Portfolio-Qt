@@ -1,7 +1,5 @@
 
 #include "MainWindow.h"
-#include "../UI/MainWindow.h"
-#include "../service/filter.h"
 #include <QMessageBox>
 #include "../exceptions/exception.h"
 #include "../validator/ArtworkValidator.h"
@@ -45,8 +43,8 @@ void MainWindow::setupUI() {
     formLayout->addRow("Height:", heightEdit);
 
     QFormLayout* filterLayout = new QFormLayout;
-    filterLayout->addRow("Medium filter:", filterMediumEdit);
-    filterLayout->addRow("Technique filter:", filterTechniqueEdit);
+    filterLayout->addRow("Filter by medium:", filterMediumEdit);
+    filterLayout->addRow("Filter by technique:", filterTechniqueEdit);
 
     QHBoxLayout* buttonLayout = new QHBoxLayout;
     buttonLayout->addWidget(addButton);
@@ -196,18 +194,7 @@ void MainWindow::onRedoClicked() {
 }
 
 void MainWindow::onFilterClicked() {
-
-            std::vector<std::shared_ptr<Filter>> filters;
-            if (!filterMediumEdit->text().isEmpty()) {
-                filters.push_back(std::make_shared<FilterByMedium>(filterMediumEdit->text().toStdString()));
-            }
-            refreshTable(service.filter(filters));
-
-             if (!filterTechniqueEdit->text().isEmpty()) {
-             filters.push_back(std::make_shared<FilterByTechnique>(filterTechniqueEdit->text().toStdString()));
-             }
-            refreshTable(service.filter(filters));
-
+            refreshTable(service.filter(filterMediumEdit->text().toStdString(), filterTechniqueEdit->text().toStdString()));
 }
 
 

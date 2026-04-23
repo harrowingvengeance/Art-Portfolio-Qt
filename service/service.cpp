@@ -65,19 +65,12 @@ vector<Artwork> &Service::returnContentsOfDatabase() const {
 }
 
 
-std::vector<Artwork> Service::filter(const std::vector<std::shared_ptr<Filter>>& filters) const {
-    std::vector<Artwork> result;
-    for (const auto& artwork : this->repo->getArtworkDB()) {
-        bool allMatch = true;
-        for (const auto& filter : filters) {
-            if (!filter->matches(artwork)) {
-                allMatch = false;
-                break;
-            }
-        }
-        if (allMatch) {
-            result.push_back(artwork);
-        }
+std::vector<Artwork> Service::filter(const std::string& medium, const std::string& technique) const {
+    std::vector<Artwork> filteredArtworks;
+    for (const auto& artwork: this->repo->getArtworkDB()) {
+        if ((!medium.empty() && artwork.getMedium() != medium) || (!technique.empty() && artwork.getTechnique() != technique))
+            continue;
+        filteredArtworks.push_back(artwork);
     }
-    return result;
+    return filteredArtworks;
 }

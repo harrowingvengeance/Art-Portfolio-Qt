@@ -15,7 +15,6 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 add_executable(finalproject_updated main.cpp
-        service/filter.cpp
         UI/MainWindow.cpp
         operations/operationStack.h
         tests/tests.cpp
@@ -28,7 +27,6 @@ add_executable(finalproject_updated main.cpp
         service/service.cpp
         UI/RepoSelectorWindow.h
         service/service.h
-        service/filter.h
         repository/defaultRepo.cpp
         repository/defaultRepo.h
         repository/CSVrepo.h

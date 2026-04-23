@@ -8,8 +8,6 @@
 #include "../repository/defaultRepo.h"
 #include "../operations/operationStack.h"
 #include "../domain/artwork.h"
-#include "../service/filter.h"
-#include <memory>
 class Service {
 private:
     repoInterface *repo;
@@ -23,7 +21,7 @@ public:
     void undoOperation();
     void redoOperation();
     vector<Artwork>& returnContentsOfDatabase() const;
-    std::vector<Artwork> filter(const std::vector<std::shared_ptr<Filter>>& filters) const;
+    std::vector<Artwork> filter(const std::string& medium, const std::string& technique) const;
 
 };
 
