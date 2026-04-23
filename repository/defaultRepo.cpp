@@ -53,8 +53,8 @@ void defaultRepo::update(const Artwork& artwork, const Artwork &updatedArtwork) 
 }
 
 
-Artwork defaultRepo::getArtwork(const string &title, const string &medium, const string &technique, const aDimension &dimension) {
-    const auto searchResult = std::find(artworkDB.begin(), artworkDB.end(), Artwork{title, medium, technique, dimension});
+Artwork defaultRepo::getArtwork(const string &artwork_title_find) {
+    const auto searchResult = std::find_if(artworkDB.begin(), artworkDB.end(), [artwork_title_find](const Artwork &iter_artwork){return iter_artwork.getTitle() == artwork_title_find;});
     if (searchResult == artworkDB.end())
         throw ArtworkNotFoundException("Could not find artwork to remove/update!");
     return *searchResult;

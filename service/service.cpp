@@ -18,7 +18,7 @@ void Service::addArtwork(const Artwork &newArtwork) {
 }
 
 void Service::removeArtwork(const Artwork &artworkToRemove) {
-    Artwork removeArtwork = this->repo->getArtwork(artworkToRemove.getTitle(), artworkToRemove.getMedium(), artworkToRemove.getTechnique(), artworkToRemove.getDimension());
+    Artwork removeArtwork = this->repo->getArtwork(artworkToRemove.getTitle());
     Operation* removeOp = new RemoveOperation(removeArtwork);
     this->repo->remove(artworkToRemove);
     opStack->recordOperation(removeOp);
@@ -26,7 +26,7 @@ void Service::removeArtwork(const Artwork &artworkToRemove) {
 }
 
 void Service::updateArtwork(const Artwork& artwork, const Artwork &updatedArtwork) {
-    Artwork oldArtwork = this->repo->getArtwork(artwork.getTitle(), artwork.getMedium(), artwork.getTechnique(), artwork.getDimension());
+    Artwork oldArtwork = this->repo->getArtwork(artwork.getTitle());
     Operation* updateOp = new UpdateOperation(oldArtwork, updatedArtwork);
     this->repo->update(artwork, updatedArtwork);
     opStack->recordOperation(updateOp);

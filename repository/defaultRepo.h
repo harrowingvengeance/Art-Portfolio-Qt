@@ -22,7 +22,7 @@ public:
 
     void update(const Artwork& artwork, const Artwork &updatedArtwork) override;
 
-    Artwork getArtwork(const string &title, const string &medium, const string &technique, const aDimension &dimension) override;
+    Artwork getArtwork(const string &title) override;
 
     vector<Artwork>& getArtworkDB() override;
 
